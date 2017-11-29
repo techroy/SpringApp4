@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="driver" class="com.lifecycle.beans.SensorDriver" >
+		<property name="type" value="Intel"></property>
+	</bean>
+
+	<bean id="robot" class="com.lifecycle.beans.Robot" init-method="start"
+		destroy-method="release">
+
+		<property name="name" value="myrobot" />
+
+		<constructor-arg>
+			<ref bean="driver" />
+		</constructor-arg>
+	</bean>
+	
+	<bean id ="engine" class="com.lifecycle.beans.Engine" scope="prototype"/>
+	
+	
+	<bean id ="car" class="com.lifecycle.beans.Car">
+	
+			<property name="beanId">
+					<idref bean="engine"/>
+			</property>
+	
+	</bean>
+	
+	
+		
+	<bean id ="engine1" class="com.lookup.beans.Engine" scope="prototype"/>
+	
+	
+	<bean id ="car1" class="com.lookup.beans.Car">
+	
+			<lookup-method name="getEngine" bean="engine1"/>
+	
+	</bean>
+
+
+</beans>
+
+
