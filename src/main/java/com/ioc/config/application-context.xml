@@ -5,7 +5,7 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-	<bean id="driver" class="com.lifecycle.beans.SensorDriver" >
+	<bean id="driver" class="com.lifecycle.beans.SensorDriver">
 		<property name="type" value="Intel"></property>
 	</bean>
 
@@ -18,29 +18,44 @@
 			<ref bean="driver" />
 		</constructor-arg>
 	</bean>
-	
-	<bean id ="engine" class="com.lifecycle.beans.Engine" scope="prototype"/>
-	
-	
-	<bean id ="car" class="com.lifecycle.beans.Car">
-	
-			<property name="beanId">
-					<idref bean="engine"/>
-			</property>
-	
-	</bean>
-	
-	
-		
-	<bean id ="engine1" class="com.lookup.beans.Engine" scope="prototype"/>
-	
-	
-	<bean id ="car1" class="com.lookup.beans.Car">
-	
-			<lookup-method name="getEngine" bean="engine1"/>
-	
+
+	<bean id="engine" class="com.lifecycle.beans.Engine" scope="prototype" />
+
+
+	<bean id="car" class="com.lifecycle.beans.Car">
+
+		<property name="beanId">
+			<idref bean="engine" />
+		</property>
+
 	</bean>
 
+
+
+	<bean id="engine1" class="com.lookup.beans.Engine" scope="prototype" />
+
+
+	<bean id="car1" class="com.lookup.beans.Car">
+
+		<lookup-method name="getEngine" bean="engine1" />
+
+	</bean>
+
+	<bean id="dbconfig" class="com.nested.beans.DbCOnfig">
+
+		<property name="userName" value="${db.userName}"></property>
+		<property name="password" value="${db.password}"></property>
+		<property name="url" value="${db.url}"></property>
+
+	</bean>
+
+
+	<bean id ="pphc" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	
+			<property name="location" value="file:/home/ram/Documents/D-DRIVE/db.properties"/>
+			
+	
+	</bean>
 
 </beans>
 

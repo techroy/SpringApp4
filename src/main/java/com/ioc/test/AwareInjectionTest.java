@@ -17,6 +17,8 @@ public class AwareInjectionTest {
 		
 		System.out.println(car.hashCode());
 		
+		
+		
 		car.run();
 
 		
